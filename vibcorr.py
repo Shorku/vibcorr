@@ -13,8 +13,8 @@ orca = config['SYSTEM']['orcapath']
 pal = config['SYSTEM']['pal']
 method = config['CALCULATION']['method']
 prop_block = config['CALCULATION']['prop_block']
-stepsize = config['OPTIONS']['stepsize']
-prop_func = config['OPTIONS']['prop_func']
+stepsize = config.getfloat('OPTIONS', 'stepsize')
+prop_func = vb.prop_funcs[config['OPTIONS']['prop_func']]
 jobname = os.path.splitext(sys.argv[1])[0]
 
 # optimize geometry and calculate frequencies

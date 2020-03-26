@@ -2,6 +2,7 @@ import numpy as np
 import struct
 import subprocess
 
+
 # read in everything from ORCA hess file
 class VibMol:
     # hessian stores hessian in cartesians
@@ -193,6 +194,9 @@ def harm_corr_from_hess(jobname,
         out.write('Equilibrium HFC {} G\n'.format(molecule.property/2.8))
         out.write('Step is {} au\n'.format(stepsize))
         out.write('Harmonic correction {} G\n'.format(harm_hfc/2.8))
+
+
+prop_funcs = {'readhfcb': readhfcb}
 
 
 
