@@ -101,9 +101,9 @@ def input_writer(molecule, jobname, index, method, nuclei, pal, mofilename=None)
 def call_orca(filename, orca):
     with open(filename + '.out', 'w') as out:
         try:
-            subprocess.run([orca, filename + '.inp'], timeout=900, stdout=out)
+            subprocess.run([orca, filename + '.inp'], timeout=86400, stdout=out)
         except subprocess.TimeoutExpired:
-            subprocess.run([orca, filename + '.inp'], timeout=900, stdout=out)
+            subprocess.run([orca, filename + '.inp'], timeout=864900, stdout=out)
     return filename + '.out'
 
 

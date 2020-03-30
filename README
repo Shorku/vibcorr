@@ -1,0 +1,57 @@
+vibcorr (Vibrational Correction) automatizes calculation of Zero-point
+vibrational corrections (ZPVC) to hyperfine coupling (HFC) constants.
+
+Copyright (2020) Shorku.  This software is distributed under
+the MIT License.
+
+----------------------------------------------------------------------
+
+vibcorr utilizes perturbative approach (see
+X.Chen et al. DOI: 10.1039/c0cp01443e;
+V.Barone et al. DOI: 10.1080/00268976.2013.796413)
+to calculate ZPVC for molecular properties (at the moment harmonic
+contribution to ZPVC to hyperfine coupling constants). Essentially vibcorr
+runs a series of quantum chemical calculations using ORCA program package
+(https://orcaforum.kofo.mpg.de/index.php) and performs numerical
+differentiation of the property of interest.
+
+SETUP
+
+  In vibcorr.ini file:
+  1. Set path to your ORCA distribution in orcapath variable in [SYSTEM]
+  block.
+  2. Set number of cores to be used in calculations in pal variable in
+  [SYSTEM] block.
+  3. Set differentiation step size (defined as max cartesian displacement
+  along vibrational mode) in [OPTIONS] block (this might be a bit tricky as
+  arbitrary property dependence on displacement along a vibrational mode is
+  not guaranteed to deviate significantly from linear dependence and a too
+  small step can lead to a randomly large contribution)
+  4. Set nuclei of interest in prop_block variable in [CALCULATION] block.
+  5. Set charge and multiplicity in method variable in [CALCULATION] block.
+  Note, here were are using B3LYP/N07D method (V.Barone et al. DOI:
+  10.1021/ct800034c) for geometry optimization and HFC constants
+  calculation. Generally method can be changed though {} fields in method
+  variable should be kept in their places.
+
+USAGE
+
+  ./vibcorr mygeometry.xyz
+
+  vibcorr will read geometry from xyz file (in angstrom), perform geometry
+  optimization, frequency calculation and HFC constants at the defined in
+  vibcorr.ini level of theory and write results to mygeometry_vibcorr.log
+
+MODIFICATION
+
+  Any other property harmonic ZPVC can be calculated using vibcorr:
+  1. Add a new function to vibcorr_util.py, which accepts filename (without
+  extension), parses any file outputted by ORCA and returns NumPy array
+  with property of interest.
+  2. Add the function name to prop_funcs dictionary in vibcorr_util.py file.
+  3. Write the function name to prop_func variable in vibcorr.ini file.
+  4. Write ORCA input block to prop_block variable in [CALCULATION] block
+  in in vibcorr.ini file.
+  5. Adjust step size.
+
+Contact info: aalchm@gmail.com
