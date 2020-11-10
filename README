@@ -8,9 +8,9 @@ the MIT License.
 
 vibcorr utilizes perturbative approach (see
 X.Chen et al. DOI: 10.1039/c0cp01443e;
-V.Barone et al. DOI: 10.1080/00268976.2013.796413)
-to calculate ZPVC for molecular properties (at the moment harmonic
-contribution to ZPVC to hyperfine coupling constants). Essentially vibcorr
+V.Barone et al. DOI: 10.1080/00268976.2013.796413
+A.A.Auer et al. DOI: 10.1063/1.1574314)
+to calculate ZPVC for molecular properties. Essentially vibcorr
 runs a series of quantum chemical calculations using ORCA program package
 (https://orcaforum.kofo.mpg.de/index.php) and performs numerical
 differentiation of the property of interest.
@@ -27,12 +27,16 @@ SETUP
   arbitrary property dependence on displacement along a vibrational mode is
   not guaranteed to deviate significantly from linear dependence and a too
   small step can lead to a randomly large contribution)
-  4. Set nuclei of interest in prop_block variable in [CALCULATION] block.
-  5. Set charge and multiplicity in method variable in [CALCULATION] block.
-  Note, here were are using B3LYP/N07D method (V.Barone et al. DOI:
-  10.1021/ct800034c) for geometry optimization and HFC constants
-  calculation. Generally method can be changed though {} fields in method
-  variable should be kept in their places.
+  4. timeout is not used
+  5. Choose harmonic only (anharmonic : False) or full VPT2 calculation (
+  note: anharmonic contribution is minor with respect to harmonic but its
+  calculation requires calculation of gradients)
+  6. Set nuclei of interest in prop_block variable in [CALCULATION] block.
+  7. Set charge and multiplicity in method variable in [CALCULATION] block.
+  Note, here were are using revPBE0/def2-TZVPP method (as in A.A.Auer et al. DOI:
+  10.1063/1.1574314) for geometry optimization and HFC constants
+  calculation. Generally method can be changed in vibcorr.ini (though {} fields in method
+  variable should be kept in their places).
 
 USAGE
 
@@ -44,7 +48,7 @@ USAGE
 
 MODIFICATION
 
-  Any other property harmonic ZPVC can be calculated using vibcorr:
+  Any other property harmonic and anharmonic ZPVC can be calculated using vibcorr:
   1. Add a new function to vibcorr_util.py, which accepts filename (without
   extension), parses any file outputted by ORCA and returns NumPy array
   with property of interest.
@@ -60,5 +64,6 @@ CITATION
   X.Chen et al. DOI: 10.1039/c0cp01443e;
   V.Barone et al. DOI: 10.1080/00268976.2013.796413
   V.Barone et al. DOI: 10.1021/ct800034c
+  A.A.Auer et al. DOI: 10.1063/1.1574314
 
 Contact info: aalchm@gmail.com
