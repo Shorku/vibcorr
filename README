@@ -28,9 +28,10 @@ SETUP
   not guaranteed to deviate significantly from linear dependence and a too
   small step can lead to a randomly large contribution)
   4. timeout is not used
-  5. Choose harmonic only (anharmonic : False) or full VPT2 calculation (
-  note: anharmonic contribution is minor with respect to harmonic but its
-  calculation requires calculation of gradients)
+  5. Choose harmonic only (anharmonic : False) or full VPT2 calculation (not
+  recommended, anharmonic contribution is usually minor with respect to harmonic, in
+  the peresent script it uses numerical differentiation  of gradients and hence
+  is not accurate enough)
   6. Set nuclei of interest in prop_block variable in [CALCULATION] block.
   7. Set charge and multiplicity in method variable in [CALCULATION] block.
   Note, here were are using revPBE0/def2-TZVPP method (as in A.A.Auer et al. DOI:
@@ -65,5 +66,6 @@ CITATION
   V.Barone et al. DOI: 10.1080/00268976.2013.796413
   V.Barone et al. DOI: 10.1021/ct800034c
   A.A.Auer et al. DOI: 10.1063/1.1574314
+  F.Neese DOI: 10.1002/wcms.1327
 
 Contact info: aalchm@gmail.com
